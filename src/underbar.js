@@ -121,7 +121,7 @@
       });
     } else {
       _.each(array, function(iterator, item) {
-        uniqueSet.add(item);
+        uniqueSet.add(iterator(item));
       });
     }
 
@@ -135,6 +135,21 @@
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
+    
+    // initialize output array
+    var output = [];
+
+    // run each on a collection
+    // _.each(collection, function(item) {
+    //   output.push(iterator(item));
+    // });
+    for(var i = 0; i < collection.length; i++) {
+      output.push(iterator(collection[i]));
+    }
+    // return output;
+    // push results into output array
+    // return the results of an output array
+    return output;
   };
  
   /*
