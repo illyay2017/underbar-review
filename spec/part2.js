@@ -126,7 +126,6 @@
         return number % 2 === 0;
       };
 
-
       it('should fail by default for an empty collection', function() {
         expect(_.some([])).to.be.false;
       });
@@ -150,7 +149,7 @@
       it('should fail for a set containing no matching values', function() {
         // Replace this line with an `expect` statement that tests
         // the behavior described by the `it` string
-        throw new Error('This test is missing.');
+        expect(_.some([1, 3, 5, 7], isEven)).to.be.false;
       });
 
       it('should pass for a collection containing one matching value', function() {
@@ -188,9 +187,11 @@
       });
 
       it('should override properties found on the destination', function() {
-        // Replace this line with an `expect` statement that tests
-        // the behavior described by the `it` string
-        throw new Error('This test is missing.');
+        var destination = { a: 'a' };
+        var source = { a: 'b' };
+        var extended = _.extend(destination, source);
+
+        expect(extended.a).to.equal('b');
       });
 
       it('should not override properties not found in the source', function() {
