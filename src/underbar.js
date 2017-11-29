@@ -108,26 +108,28 @@
   };
 
   // Produce a duplicate-free version of the array.
+  // _.uniq = function(array, isSorted, iterator) {
+  //   // if we can use set?
+  //   // take each item and add it to the set
+  //   // convert set to array and return that
+  // };
+
   _.uniq = function(array, isSorted, iterator) {
-    // if we can use set?
-    // take each item and add it to the set
-    
-    // initialize set
-    var uniqueSet = new Set();
-
-    if (iterator === undefined) {
-      _.each(array, function(item) {
-        uniqueSet.add(item);
-      });
-    } else {
-      _.each(array, function(iterator, item) {
-        uniqueSet.add(iterator(item));
-      });
-    }
-
-    
-    return Array.from(uniqueSet);
-    // convert set to array and return that
+    var uniqueValues = [];
+    var uniqueIterators = [];
+    _.each(array, function(element) {
+      if (iterator) {
+        if (!uniqueIterators.includes(iterator(element))) {
+          uniqueIterators.push(iterator(element));
+          uniqueValues.push(element);
+        }
+      } else {
+        if (!uniqueValues.includes(element)) {
+          uniqueValues.push(element);
+        }
+      }
+    });
+    return uniqueValues;
   };
 
   // Return the results of applying an iterator to each element.
